@@ -419,28 +419,8 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     })
 
-  document.querySelectorAll("#projects [data-modal]")
-    .forEach((trigger) => {
-      trigger.addEventListener("click", () => {
-        const modal = document.getElementById(trigger.dataset.modal)
-        if (modal) {
-          modal.classList.add("active")
-        }
-      })
-    })
-
-  document.querySelectorAll("#projects .close")
-    .forEach((closeButton) => {
-      closeButton.addEventListener("click", () => {
-        const modal = closeButton.closest(".modal")
-        if (modal) {
-          modal.classList.remove("active")
-        }
-      })
-    })
-
   updateCarousel()
-})
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const timelineSection = document.querySelector("#timeline");
@@ -483,27 +463,120 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCards(achievementsRow, achievementData);
 });
 
-const sendBtn = document.querySelector(".contact-btn");
-const input = document.querySelector(".contact-input");
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("sendBtn");
+  const input = document.querySelector(".contact-input");
 
-if (sendBtn && input) {
-  sendBtn.addEventListener("click", () => {
+  if (!btn || !input) return;
+
+  btn.addEventListener("click", () => {
     const message = input.value;
 
     if (!message.trim()) {
-      alert("Write something first");
+      alert("Please write a message");
       return;
     }
 
-    const messages = JSON.parse(localStorage.getItem("messages")) || [];
-    messages.push({
-      text: message,
-      time: new Date().toLocaleString()
-    });
+    btn.innerText = "Opening Mail...";
 
-    localStorage.setItem("messages", JSON.stringify(messages));
+    const email = "manvimishra1501@gmail.com";
+    const subject = "Message from Portfolio";
 
-    input.value = "";
-    alert("Message saved!");
+    const mailtoLink =
+      `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+
+    window.location.href = mailtoLink;
   });
-}
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".view-more");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const modalId = btn.getAttribute("data-modal");
+      const modal = document.getElementById(modalId);
+
+      if (!modal) {
+        console.error("Modal not found:", modalId);
+        return;
+      }
+
+      modal.style.display = "flex";
+    });
+  });
+
+  const closeBtns = document.querySelectorAll(".modal-close");
+
+  closeBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const modal = btn.closest(".modal");
+      if (modal) modal.style.display = "none";
+    });
+  });
+
+  const modals = document.querySelectorAll(".modal");
+
+  modals.forEach((modal) => {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  });
+
+  console.log("Modal system loaded");
+});
+
+setTimeout(() => {
+
+  const buttons = document.querySelectorAll(".view-more");
+
+  buttons.forEach(btn => {
+
+    btn.onclick = function () {
+
+      const id = this.getAttribute("data-modal");
+
+      const modal = document.getElementById(id);
+
+      if (!modal) {
+        alert("Modal not found: " + id);
+        return;
+      }
+
+      modal.style.display = "flex";
+    };
+
+  });
+
+  const closeBtns = document.querySelectorAll(".modal-close");
+
+  closeBtns.forEach(btn => {
+
+    btn.onclick = function () {
+
+      const modal = this.closest(".modal");
+
+      if (modal) modal.style.display = "none";
+    };
+
+  });
+
+  const modals = document.querySelectorAll(".modal");
+
+  modals.forEach(modal => {
+
+    modal.onclick = function (e) {
+
+      if (e.target === this) {
+        this.style.display = "none";
+      }
+
+    };
+
+  });
+
+  console.log("Modal FORCE FIX applied");
+
+}, 500);
