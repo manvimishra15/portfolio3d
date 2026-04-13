@@ -437,14 +437,17 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const achievementData = [
+    { title: "Hack-O-Hire ", sub: "Barclays Hackathon Finalist" },
+    { title: "HackCelestia Hackathon", sub: "2nd Runner-Up" },
+    { title: "IHCI International Conference", sub: "Conference Attendee" },
     { title: "B-Plan Winner", sub: "Startup India + MeitY" },
     { title: "Startup Nexas", sub: "Runner-Up" },
     { title: "Hack with Rajasthan", sub: "Top 10" },
     { title: "Internal SIH", sub: "Top 45" },
-    { title: "IHCI International Conference", sub: "Conference Attendee" },
+    
     { title: "OpenCode", sub: "Open Source Contributor" },
-    { title: "HackCelestia Hackathon", sub: "2nd Runner-Up" },
-    { title: "Hack-O-Hire ", sub: "Barclays Hackathon Finalist" }
+    
+    
   ];
 
   const renderCards = (row, items) => {
